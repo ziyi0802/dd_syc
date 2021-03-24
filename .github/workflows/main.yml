@@ -14,17 +14,26 @@ jobs:
 
       - name: Git clone
         env:
-          ACTION_DEPLOY_KEY: ${{ secrets.DEPLOY_PRI }}
+          GITEE_DEPLOY_KEY: ${{ secrets.GITEE_DEPLOY_KEY }}
         run: |
           mkdir -p ~/.ssh/
-          echo "$ACTION_DEPLOY_KEY" > ~/.ssh/id_rsa
+          echo "$GITEE_DEPLOY_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan gitee.com >> ~/.ssh/known_hosts
           git clone -b master git@gitee.com:lxk0301/jd_scripts.git
 
       - name: Git push
+        env:
+          GITHUBS_DEPLOY_KEY: ${{ secrets.GITHUBS_DEPLOY_KEY }}
+        run: |
+          cat /dev/null > ~/.ssh/id_rsa
+          echo "$GITHUBS_DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
           git remote rm origin
           git remote add origin https://github.com/l107868382/dd_syc.git
-
+          git add .
+          git commit -m 'git_sysc'
+          git push -u origin master -f
 
 
