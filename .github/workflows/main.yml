@@ -12,16 +12,16 @@ jobs:
         with:
           ref: main
 
-#      - name: Git clone
-#        env:
-#          GITEE_DEPLOY_KEY: ${{ secrets.GITEE_DEPLOY_KEY }}
-#        run: |
-#          mkdir -p ~/.ssh/
-#          echo "$GITEE_DEPLOY_KEY" > ~/.ssh/id_rsa
-#          chmod 600 ~/.ssh/id_rsa
-#          ssh-keyscan gitee.com >> ~/.ssh/known_hosts
-#          git clone -b master git@gitee.com:lxk0301/jd_scripts.git
-#
+      - name: Git clone
+        env:
+          GITEE_DEPLOY_KEY: ${{ secrets.GITEE_DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$GITEE_DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan gitee.com >> ~/.ssh/known_hosts
+          git clone -b main https://github.com/l107868382/dd_syc.git
+
 
       - name: Git push
         env:
