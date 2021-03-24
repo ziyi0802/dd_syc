@@ -1,7 +1,7 @@
 name: CI
 on:
   workflow_dispatch:
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v1
         with:
           ref: main
-          
+
       - name: Git clone
         env:
           ACTION_DEPLOY_KEY: ${{ secrets.DEPLOY_PRI }}
@@ -21,7 +21,10 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan gitee.com >> ~/.ssh/known_hosts
           git clone -b master git@gitee.com:lxk0301/jd_scripts.git
-          
-      
-      
-      
+
+      - name: Git push
+          git remote rm origin
+          git remote add origin https://github.com/l107868382/dd_syc.git
+
+
+
