@@ -1,0 +1,25 @@
+name: CI
+on:
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v1
+        with:
+          ref: master
+          
+      - name: git clone
+        env:
+          ACTION_DEPLOY_KEY: ${{ secrets.DEPLOY_PRI }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$ACTION_DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan gitee.com >> ~/.ssh/known_hosts
+          git clone -b master git@gitee.com:lxk0301/jd_scripts.git
+              
+   
