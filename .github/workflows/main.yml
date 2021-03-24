@@ -32,13 +32,12 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
+          touch README.md
+          git remote rm origin
+          git remote add origin git@github.com:l107868382/dd_syc.git
           git config --global user.email "107868382@qq.com"
           git config --global user.name "buyi"
 
-          touch README.md
-
-          git remote rm origin
-          git remote add origin git@github.com:l107868382/dd_syc.git
           git add .
           git commit -m 'dd_sysc'
           git push -u origin master -f
