@@ -32,6 +32,7 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
+          cd jd_scripts/
           git branch master
 
           git remote rm origin
