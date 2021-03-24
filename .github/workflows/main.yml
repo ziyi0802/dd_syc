@@ -20,7 +20,8 @@ jobs:
           echo "$GITEE_DEPLOY_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan gitee.com >> ~/.ssh/known_hosts
-          git clone -b main https://github.com/l107868382/dd_syc.git
+          #git clone -b main https://github.com/l107868382/dd_syc.git
+          git clone -b master git@gitee.com:lxk0301/jd_scripts.git
 
 
       - name: Git push
@@ -34,7 +35,7 @@ jobs:
 
           git branch master
 
-          touch README.md
+          #touch README.md
           git remote rm origin
           git remote add origin git@github.com:l107868382/dd_syc.git
           git config --global user.email "107868382@qq.com"
