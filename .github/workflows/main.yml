@@ -12,9 +12,10 @@ jobs:
         with:
           ref: main
 
-      - name: Git clone
+      - name: Git clone and push
         env:
           GITEE_DEPLOY_KEY: ${{ secrets.GITEE_DEPLOY_KEY }}
+          GITHUBS_DEPLOY_KEY: ${{ secrets.GITHUBS_DEPLOY_KEY }}
         run: |
           mkdir -p ~/.ssh/
           echo "$GITEE_DEPLOY_KEY" > ~/.ssh/id_rsa
@@ -22,17 +23,10 @@ jobs:
           ssh-keyscan gitee.com >> ~/.ssh/known_hosts
           git clone -b master git@gitee.com:lxk0301/jd_scripts.git
 
-
-      - name: Git push
-        env:
-          GITHUBS_DEPLOY_KEY: ${{ secrets.GITHUBS_DEPLOY_KEY }}
-        run: |
           cat /dev/null > ~/.ssh/id_rsa
           echo "$GITHUBS_DEPLOY_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-          cd jd_scripts/
 
           git remote rm origin
           git remote add origin git@github.com:l107868382/dd_syc.git
@@ -42,5 +36,3 @@ jobs:
           git add .
           git commit -m 'dd_sysc'
           git push -u origin master -f
-
-
