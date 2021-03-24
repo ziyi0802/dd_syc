@@ -12,7 +12,7 @@ jobs:
         with:
           ref: main
 
-      - name: Git clone and push
+      - name: Git clone
         env:
           GITEE_DEPLOY_KEY: ${{ secrets.GITEE_DEPLOY_KEY }}
           GITHUBS_DEPLOY_KEY: ${{ secrets.GITHUBS_DEPLOY_KEY }}
