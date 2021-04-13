@@ -19,11 +19,13 @@ jobs:
           MONK_GITHUBS_DEPLOY_KEY: ${{ secrets.MONK_GITHUBS_DEPLOY_KEY }}
           GITHUBS_DEPLOY_KEY: ${{ secrets.GITHUBS_DEPLOY_KEY }}
         run: |
-          mkdir -p ~/.ssh/
-          echo "$MONK_GITHUBS_DEPLOY_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          git clone -b dust git@github.com:monk-coder/dust.git
+          # mkdir -p ~/.ssh/
+          # echo "$MONK_GITHUBS_DEPLOY_KEY" > ~/.ssh/id_rsa
+          # chmod 600 ~/.ssh/id_rsa
+          # ssh-keyscan github.com >> ~/.ssh/known_hosts
+          # git clone -b dust git@github.com:monk-coder/dust.git
+          wget https://github.com/l107868382/dd_diy/blob/lxk0301_shell/monk.sh
+          sh monk.sh
       - name: Git push
         env:
           GITHUBS_DEPLOY_KEY: ${{ secrets.GITHUBS_DEPLOY_KEY }}
