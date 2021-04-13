@@ -1,0 +1,43 @@
+name: sys_monk
+on:
+  workflow_dispatch:
+  schedule:
+      - cron: '0 */2 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v1
+        with:
+          ref: main
+
+      - name: Git clone
+        env:
+          MONK_GITHUBS_DEPLOY_KEY: ${{ secrets.MONK_GITHUBS_DEPLOY_KEY }}
+          GITHUBS_DEPLOY_KEY: ${{ secrets.GITHUBS_DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$MONK_GITHUBS_DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git clone -b dust git@github.com:monk-coder/dust.git
+      - name: Git push
+        env:
+          GITHUBS_DEPLOY_KEY: ${{ secrets.GITHUBS_DEPLOY_KEY }}
+        run: |
+          cat /dev/null > ~/.ssh/id_rsa
+          echo "$GITHUBS_DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          cd dust/
+          rm -rf .git/ .github/workflows/
+          git init
+          git config --global user.email "107868382@qq.com"
+          git config --global user.name "buyi"
+          git remote add origin git@github.com:l107868382/dd_syc.git
+          git add .
+          git commit -m 'dd_sysc'
+          git push -u origin monk -f
