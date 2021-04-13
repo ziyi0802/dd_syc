@@ -1,4 +1,4 @@
-name: CI
+name: 同步lxk0301仓库
 on:
   workflow_dispatch:
   schedule:
