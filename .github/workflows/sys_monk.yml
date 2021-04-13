@@ -40,4 +40,4 @@ jobs:
           git remote add origin git@github.com:l107868382/dd_syc.git
           git add .
           git commit -m 'dd_sysc'
-          git push -u origin monk -f
+          git push -u origin master:monk -f
