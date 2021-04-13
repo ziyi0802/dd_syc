@@ -1,4 +1,4 @@
-name: sys_monk
+name: 同步monk仓库
 on:
   workflow_dispatch:
   schedule:
