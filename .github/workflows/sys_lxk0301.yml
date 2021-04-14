@@ -2,7 +2,7 @@ name: 同步lxk0301仓库
 on:
   workflow_dispatch:
   schedule:
-      - cron: '0 */12 * * *'
+      - cron: '11 0 * * *'
 
 jobs:
   build:
